@@ -1,4 +1,5 @@
-# Math Game is a game to help my kids learn math
+# Math Game 
+A game to help my kids learn math
 
 ## TODO
 - [ ] Correct a wrong answer
