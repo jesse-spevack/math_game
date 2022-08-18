@@ -11,7 +11,7 @@ class Problem
   end
 
   def show
-    puts "What is #{fact}?"
+    puts "\nWhat is #{fact}?\n"
   end
 
   def fact

@@ -13,12 +13,16 @@ class Round
     round = Round.new
     round.show_problem 
 
-    answer = Answer.new
-    if answer == round.solution
-      puts PositiveFeedback.new(round.problem, answer).display
-    else
-      puts NegativeFeedback.new(round.problem, answer).display
+    @answer = Answer.new
+
+    while @answer != round.solution
+      puts NegativeFeedback.new(round.problem, @answer).display
+      round.show_problem
+      @answer = Answer.new
     end
+    
+    puts PositiveFeedback.new(round.problem, @answer).display
+      
   end
 
   def show_problem
