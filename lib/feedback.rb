@@ -1,9 +1,16 @@
+# typed: strict
+require 'sorbet-runtime'
+require './lib/player_input'
 class Feedback
+  extend T::Sig
+
+  sig{params(problem: Problem, answer: Answer).void}
   def initialize(problem, answer)
     @problem = problem
     @answer = answer
   end
 
+  sig{params(blk: T.proc.returns(NilClass)).void}
   def draw_box(&blk)
     border = (0..30).to_a.map { |_| "-" }.join
     puts "\n" + border + "\n"
@@ -13,6 +20,7 @@ class Feedback
 end
 
 class PositiveFeedback < Feedback
+  sig{void}
   def display
     draw_box do
       puts "#{descriptor} job solving #{@problem.fact}"
@@ -20,12 +28,14 @@ class PositiveFeedback < Feedback
     end
   end
 
+  sig{returns(String)}
   def descriptor
     %w(great stupendous awesome incredible fantstic fabulous terrific super good nice).sample.capitalize
   end
 end
 
 class NegativeFeedback < Feedback
+  sig{void}
   def display
     draw_box do
       puts "\n#{descriptor}"
@@ -34,10 +44,12 @@ class NegativeFeedback < Feedback
     end
   end
 
+  sig{returns(Integer)}
   def answer_error
     (@problem.solution - @answer.response).abs
   end
 
+  sig{returns(String)}
   def descriptor
     [
       'You can do better.',

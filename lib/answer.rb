@@ -1,4 +1,4 @@
-# typed: strong
+# typed: strict
 require 'sorbet-runtime'
 require './lib/player_input'
 
