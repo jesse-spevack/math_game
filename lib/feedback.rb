@@ -29,13 +29,13 @@ class NegativeFeedback < Feedback
   def display
     draw_box do
       puts "\n#{descriptor}"
-      puts "#{@answer.input} is not the answer to #{@problem.fact}"
+      puts "#{@answer.response} is not the answer to #{@problem.fact}"
       puts "You are off by #{answer_error}"
     end
   end
 
   def answer_error
-    (@problem.solution - @answer.input).abs
+    (@problem.solution - @answer.response).abs
   end
 
   def descriptor
