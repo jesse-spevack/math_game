@@ -1,4 +1,9 @@
+require 'tty-font'
+require 'tty-box'
 require './lib/round'
+require './lib/streak'
+require './lib/score'
+require './lib/scoreboard'
 
 class Game
   attr_reader :name
@@ -6,7 +11,8 @@ class Game
   def initialize
     @name = welcome_player
     @complete = false
-    @score = 0
+    @score = Score.new
+    @streak = Streak.new
   end
   
   def run
@@ -14,19 +20,32 @@ class Game
 
     until complete?
       round = Round.new
-      round.play
-      score(round)
+      result = round.play
+
+      streak.increment if result.first_guess?
+      score.increment if result.success?
+      @complete = result.quit?
+
+      print scoreboard
     end
     
-    game.finish
+    finish
   end
 
   def complete?
     @complete
   end
 
-  def score(round)
-    @score += 1 if round.success?
+  private
+
+  attr_reader :streak, :score
+
+  def scoreboard
+    Scoreboard.new(
+      name: name,
+      score: score,
+      streak: streak
+    ).display
   end
 
   def finish
@@ -34,7 +53,9 @@ class Game
   end
   
   def welcome_player
-    puts "Welcome to math game! What is your name?"
+    font = TTY::Font.new(:doom, letter_spacing: 2)
+    puts font.write "Math Game!" 
+    puts "What is your name?"
     gets.chomp
   end
 

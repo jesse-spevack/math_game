@@ -1,3 +1,4 @@
+require './lib/styles'
 class Problem
   attr_reader :x, :y
 
@@ -11,7 +12,9 @@ class Problem
   end
 
   def show
-    puts "\nWhat is #{fact}?\n"
+    frame = TTY::Box.frame(**Styles.problem_style) do
+      "\nWhat is #{fact}?\n"
+    end
   end
 
   def fact

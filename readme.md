@@ -2,10 +2,12 @@
 A game to help my kids learn math
 
 ## TODO
-- [ ] Correct a wrong answer
-- [ ] Scores
+- [x] Correct a wrong answer
+- [x] Scores
 - [ ] Top Scores
-- [ ] Streaks
+- [x] Streaks
 - [ ] Expanded math facts....
 - [ ] text to speech.... 
 - [ ] Emojis / ascii art
+- [x] (tty toolkit)[https://ttytoolkit.org/components/]
+- [ ] Update feedback to use tty 

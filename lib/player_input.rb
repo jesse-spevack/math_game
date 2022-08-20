@@ -8,9 +8,4 @@ module PlayerInput
   def self.string
     gets.chomp
   end
-
-  sig{returns(Integer)}
-  def self.integer
-    string.to_i
-  end
 end

@@ -46,7 +46,7 @@ class NegativeFeedback < Feedback
 
   sig{returns(Integer)}
   def answer_error
-    (@problem.solution - @answer.response).abs
+    (@problem.solution - @answer.response.to_i).abs
   end
 
   sig{returns(String)}
